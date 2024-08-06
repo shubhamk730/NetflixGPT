@@ -4,7 +4,6 @@ import { BG_URL, USER_LOGO } from '../utils/constants'
 import { checkVaidData } from '../utils/validate';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from '../utils/firebase';
-import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addUser } from '../utils/userSlice';
 
@@ -12,7 +11,6 @@ import { addUser } from '../utils/userSlice';
 const Login = () => {
     const [isSignInForm, setIsSignInForm] = useState(true);
     const [errorMsg, setErrorMsg] = useState("");
-    const navigate = useNavigate();
     const emailInputRef = useRef(null);
     const passwordInputRef = useRef(null);
     const nameInputRef = useRef(null);  // add name validation
@@ -46,7 +44,6 @@ const Login = () => {
                     
                     const { uid, email, displayName, photoURL } = auth.currentUser;
                     dispatch(addUser({uid, email, displayName, photoURL}));
-                    navigate("/browse");
 
                   }).catch((error) => {
                     throw new Error(error);
@@ -65,7 +62,6 @@ const Login = () => {
                 // Signed in 
                 const user = userCredential.user;
                 console.log(user);
-                navigate("/browse");
             })
             .catch((error) => {
                 const errorCode = error.code;
