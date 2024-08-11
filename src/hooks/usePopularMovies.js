@@ -19,6 +19,7 @@ const usePopularMovies = () => {
   };
 
   useEffect(() => {
+    console.log("populat movies, now not fetching : ", popularMovies);
     !popularMovies && getPopularMovies();
   }, []);
 
